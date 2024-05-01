@@ -1,0 +1,16 @@
+FROM python:3.9-slim
+WORKDIR /app
+
+RUN python3 -m venv venv
+RUN . venv/bin/activate
+
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+
+ENV DB_HOST="127.0.0.1"
+ENV DB_USER="app"
+ENV DB_PASSWORD="very_strong"
+ENV DB_NAME="example"
+
+COPY main.py ./
+CMD ["python", "main.py"]
